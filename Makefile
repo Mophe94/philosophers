@@ -24,6 +24,9 @@ OBJ_DIR = .cache
 
 # Files
 SRC = $(SRC_DIR)/main.c
+	  $(SRC_DIR)/utils/utils.c
+	  $(SRC_DIR)/check_args.c
+	  
 OBJ = $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 #############################################
