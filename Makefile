@@ -12,7 +12,7 @@ NC = \033[0m
 
 #############################################
 
-NAME = philosophers
+NAME = philo
 
 CC = cc
 
@@ -23,9 +23,9 @@ SRC_DIR = src
 OBJ_DIR = .cache
 
 # Files
-SRC = $(SRC_DIR)/main.c
-	  $(SRC_DIR)/utils/utils.c
-	  $(SRC_DIR)/check_args.c
+SRC = $(SRC_DIR)/main.c\
+	  $(SRC_DIR)/utils/utils.c\
+	  $(SRC_DIR)/check_args.c\
 	  
 OBJ = $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbajeux <dbajeux@student.19.be>            +#+  +:+       +#+        */
+/*   By: dbajeux <dbajeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:19:33 by dbajeux           #+#    #+#             */
-/*   Updated: 2025/01/14 17:27:47 by dbajeux          ###   ########.fr       */
+/*   Updated: 2025/01/15 17:22:04 by dbajeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@
 
 int	ft_putstr(char *str);
 int	ft_isdigit(int c);
-int	ft_atoi(const char *str);
+int	ft_atoi(char *str);
+int check_args(int argc,char **argv);
+
 
 #endif

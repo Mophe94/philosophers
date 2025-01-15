@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbajeux <dbajeux@student.19.be>            +#+  +:+       +#+        */
+/*   By: dbajeux <dbajeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:18:01 by dbajeux           #+#    #+#             */
-/*   Updated: 2025/01/14 17:27:19 by dbajeux          ###   ########.fr       */
+/*   Updated: 2025/01/15 16:58:02 by dbajeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,14 @@ int	ft_putstr(char *str)
 	if (!str)
 	{
 		write(1, "(null)", 6);
+		return (0);
 	}
 	while (str[i] != '\0')
 	{
 		write(1, &str[i], 1);
 		i++;
 	}
+	return (1);
 }
 
 int	ft_isdigit(int c)
@@ -43,7 +45,7 @@ static int	ft_check(int sign)
 		return (0);
 }
 
-int	ft_atoi(const char *str)
+int	ft_atoi(char *str)
 {
 	int i;
 	int sign;
