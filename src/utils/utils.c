@@ -6,7 +6,7 @@
 /*   By: dbajeux <dbajeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:18:01 by dbajeux           #+#    #+#             */
-/*   Updated: 2025/01/15 16:58:02 by dbajeux          ###   ########.fr       */
+/*   Updated: 2025/02/03 16:12:24 by dbajeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,31 @@ int	ft_isdigit(int c)
 	else
 		return (0);
 }
-static int	ft_check(int sign)
-{
-	if (sign == 1)
-		return (-1);
-	else
-		return (0);
-}
 
+long	ft_atol(char *str)
+{
+	int i;
+	int sign;
+	unsigned long long result;
+
+	i = 0;
+	sign = 1;
+	result = 0;
+	while ((str[i] >= '\t' && str[i] <= '\r') || str[i] == ' ')
+		i++;
+	if (str[i] == '-' || str[i] == '+')
+	{
+		if (str[i] == '-')
+			sign *= -1;
+		i++;
+	}
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		result = result * 10 + (str[i] - 48);
+		i++;
+	}
+	return (result * sign);
+}
 int	ft_atoi(char *str)
 {
 	int i;
