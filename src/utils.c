@@ -6,11 +6,11 @@
 /*   By: dbajeux <dbajeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:18:01 by dbajeux           #+#    #+#             */
-/*   Updated: 2025/02/03 16:12:24 by dbajeux          ###   ########.fr       */
+/*   Updated: 2025/03/10 14:27:59 by dbajeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/philosophers.h"
+#include "../includes/philosophers.h"
 
 int	ft_putstr(char *str)
 {
@@ -62,6 +62,15 @@ long	ft_atol(char *str)
 	}
 	return (result * sign);
 }
+
+static int	ft_check(int sign)
+{
+	if (sign == 1)
+		return (-1);
+	else
+		return (0);
+}
+
 int	ft_atoi(char *str)
 {
 	int i;
@@ -87,4 +96,31 @@ int	ft_atoi(char *str)
 			return (ft_check(sign));
 	}
 	return (result * sign);
+}
+
+size_t get_current_time(void)
+{
+	struct timeval time_now;
+
+	if (gettimeofday(&time_now,NULL) == -1)
+	{
+		write(2,"Error in function getimeofday()\n",32);
+		return (FALSE);
+	}
+	return (time_now.tv_sec * 1000 + time_now.tv_usec / 1000);
+}
+
+void	*ft_memset(void *b, int c, size_t len)
+{
+	size_t			i;
+	unsigned char	*cast;
+
+	i = 0;
+	cast = b;
+	while (i < len)
+	{
+		cast[i] = c;
+		i++;
+	}
+	return (b);
 }
