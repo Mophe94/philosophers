@@ -26,8 +26,11 @@ OBJ_DIR = .cache
 SRC = $(SRC_DIR)/main.c\
 	  $(SRC_DIR)/utils.c\
 	  $(SRC_DIR)/check_args.c\
-	   $(SRC_DIR)/init.c\
-	  
+	  $(SRC_DIR)/init.c\
+	  $(SRC_DIR)/print_test.c\
+	  $(SRC_DIR)/routine.c\
+	  $(SRC_DIR)/thread.c\
+
 OBJ = $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 #############################################

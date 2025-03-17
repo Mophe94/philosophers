@@ -6,7 +6,7 @@
 /*   By: dbajeux <dbajeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:27:05 by dbajeux           #+#    #+#             */
-/*   Updated: 2025/01/18 17:51:09 by dbajeux          ###   ########.fr       */
+/*   Updated: 2025/03/17 13:04:56 by dbajeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	check_args(int argc, char **argv)
 	if (argc != 6 && argc != 5)
 	{
 		printf("Error : put 5 or 6 arguments\n");
-		return (0);
+		return (FALSE);
 	}
 	while (argv[i])
 	{
@@ -37,12 +37,12 @@ int	check_args(int argc, char **argv)
 				if ((ft_isdigit(argv[i][j]) == 1))
 					j++;
 				else
-					return(0);
+					return(FALSE);
 			}
 		}
 		else
-			return (0);
+			return (FALSE);
 		i++;
 	}
-	return (1);
+	return (TRUE);
 }
