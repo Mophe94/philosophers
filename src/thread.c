@@ -6,7 +6,7 @@
 /*   By: dbajeux <dbajeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 11:39:55 by dbajeux           #+#    #+#             */
-/*   Updated: 2025/03/17 12:55:35 by dbajeux          ###   ########.fr       */
+/*   Updated: 2025/03/20 12:46:16 by dbajeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,45 +36,38 @@ void print_death_message(t_philo *philo)
 }
 
 
-void	*monitoring_life(void *arg)
-{
-	t_table	*table;
-	size_t	current_time;
-	int		i;
-	int running;
+// void	*monitoring_life(void *arg)
+// {
+// 	t_table	*table;
+// 	size_t	current_time;
+// 	int		i;
 
-	table = (t_table *)arg;
-	while (1)
-	{
-		pthread_mutex_lock(&table->is_running_lock);
-		running = table->is_running;
-		pthread_mutex_unlock(&table->is_running_lock);
-		if (running == false)
-			break ;
-		current_time = get_current_time();
-		i = 0;
-		while (i < table->count_philo)
-		{
-			pthread_mutex_lock(&table->meal_lock);
-			if (current_time
-				- table->philo[i].times.last_meal >= table->philo[i].times.die)
-			{
-				pthread_mutex_lock(&table->is_running_lock);
-				table->is_running = false;
-				pthread_mutex_unlock(&table->is_running_lock);
-				pthread_mutex_lock(&table->write_lock);
-				print_death_message(&table->philo[i]);
-				pthread_mutex_unlock(&table->write_lock);
-				pthread_mutex_unlock(&table->meal_lock);
-				return (NULL);
-			}
-			pthread_mutex_unlock(&table->meal_lock);
-			i++;
-		}
-		usleep(1000);
-	}
-	return (NULL);
-}
+// 	table = (t_table *)arg;
+// 	while (1)
+// 	{
+// 		current_time = get_current_time();
+// 		i = 0;
+// 		while (i < table->count_philo)
+// 		{
+// 			if (current_time
+// 				- table->philo[i].times.last_meal >= table->philo[i].times.die)
+// 			{
+// 				pthread_mutex_lock(&table->write_lock);
+// 				print_death_message(&table->philo[i]);
+// 				pthread_mutex_unlock(&table->write_lock);
+// 				pthread_mutex_lock(&table->is_running_lock);
+// 				table->is_running = false;
+// 				pthread_mutex_unlock(&table->is_running_lock);
+// 				pthread_mutex_unlock(&table->meal_lock);
+// 				return (NULL);
+// 			}
+// 			pthread_mutex_unlock(&table->meal_lock);
+// 			i++;
+// 		}
+// 		usleep(1000);
+// 	}
+// 	return (NULL);
+// }
 
 
 
@@ -96,6 +89,7 @@ void	*philosopher_life(void *arg)
 		pthread_mutex_unlock(&philo->table->is_running_lock);
 		printf("Philosophe %d va penser\n", philo->id);
 		thinking_routine(philo);
+		usleep(1000);
 	}
 	return (NULL);
 }
@@ -110,7 +104,7 @@ int	create_threads(t_table *table)
 	{
 		if (pthread_create(&table->philo[i].thread_id, NULL, philosopher_life,
 				&table->philo[i]) != 0)
-			return (printf("Error : can't create thread for the philo number%d\n",
+			return (printf("Error : can't create thread for the philo number %d\n",
 					table->philo[i].id), FALSE);
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: dbajeux <dbajeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:57:18 by dbajeux           #+#    #+#             */
-/*   Updated: 2025/03/17 14:16:04 by dbajeux          ###   ########.fr       */
+/*   Updated: 2025/03/18 11:15:28 by dbajeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ int	init_table(t_table *table, int count_philo)
 	table->philo = malloc(sizeof(t_philo) * count_philo);
     if (!table->philo)
     {
-        
         printf("Error : Malloc philo init table\n");
         return (FALSE);
     }
