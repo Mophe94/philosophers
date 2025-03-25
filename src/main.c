@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbajeux <dbajeux@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dbajeux <dbajeux@student.19.be>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 09:35:35 by dbajeux           #+#    #+#             */
-/*   Updated: 2025/03/20 12:46:01 by dbajeux          ###   ########.fr       */
+/*   Updated: 2025/03/25 19:47:20 by dbajeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	main(int argc, char **argv)
 	{
 		init_table(&table, ft_atoi(argv[1]));
 		init_philo(&table,ft_atoi(argv[2]),ft_atoi(argv[3]));
-		print_table(&table);
+		//print_table(&table);
         create_threads(&table);	
     	for (int i = 0; i < table.count_philo; i++)
 			pthread_join(table.philo[i].thread_id, NULL);

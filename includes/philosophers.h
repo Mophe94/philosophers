@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbajeux <dbajeux@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dbajeux <dbajeux@student.19.be>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:19:33 by dbajeux           #+#    #+#             */
-/*   Updated: 2025/03/12 18:43:00 by dbajeux          ###   ########.fr       */
+/*   Updated: 2025/03/25 19:41:40 by dbajeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,4 +92,7 @@ void				print_table(t_table *table);
 int					create_threads(t_table *table);
 void				*monitoring_life(void *);
 void				thinking_routine(t_philo *philo);
+int print_message(t_philo *philo,char *msg);
+int	ft_usleep(size_t milliseconds);
+void sleep_routine(t_philo *philo);
 #endif

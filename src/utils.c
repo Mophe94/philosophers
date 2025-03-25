@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbajeux <dbajeux@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dbajeux <dbajeux@student.19.be>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:18:01 by dbajeux           #+#    #+#             */
-/*   Updated: 2025/03/10 14:27:59 by dbajeux          ###   ########.fr       */
+/*   Updated: 2025/03/25 19:37:35 by dbajeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,4 +123,19 @@ void	*ft_memset(void *b, int c, size_t len)
 		i++;
 	}
 	return (b);
+}
+
+/*le fait d utiliser cette fonction a la place d un usleep "normal"  améliore la précision, la réactivité et l’adaptabilité du programme.
+usleep(500) dans la boucle permet de réduire le temps de sommeil par petites tranches au lieu d’attendre une longue période d’un seul coup.
+Cela permet de réagir plus vite aux changements d’état du programme (comme une fin de simulation ou la détection d’un philosophe mort).
+Dans le contexte de Philosophers, où la gestion du temps est critique pour éviter les conditions de famine et la synchronisation des threads, cette approche améliore la fluidité du programme. */
+
+int	ft_usleep(size_t milliseconds)
+{
+	size_t	start;
+
+	start = get_current_time();
+	while ((get_current_time() - start) < milliseconds)
+		usleep(500);
+	return (0);
 }
