@@ -6,40 +6,11 @@
 /*   By: dbajeux <dbajeux@student.19.be>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 11:36:12 by dbajeux           #+#    #+#             */
-/*   Updated: 2025/03/25 19:40:26 by dbajeux          ###   ########.fr       */
+/*   Updated: 2025/03/26 11:36:30 by dbajeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../includes/philosophers.h"
-#include <stdio.h>
-
-int check_death(t_philo *philo)
-{
-    pthread_mutex_lock(&philo->table->is_running_lock);
-    if (philo->table->is_running == FALSE)
-    {
-        pthread_mutex_unlock(&philo->table->is_running_lock);
-        return (FALSE);
-    }
-    pthread_mutex_unlock(&philo->table->is_running_lock);
-    return (TRUE);
-    
-}
-
-int print_message(t_philo *philo,char *msg)
-{
-    size_t time;
-
-    
-    pthread_mutex_lock(&philo->table->write_lock);
-    time = get_current_time() - philo->times.born_time;
-    if (check_death(philo) == FALSE)
-    {
-       printf("%zu Philosophe %d %s\n",time,philo->id,msg); 
-    }
-    pthread_mutex_unlock(&philo->table->write_lock);
-    return (TRUE);
-}
 
 void thinking_routine(t_philo *philo)
 {
@@ -87,4 +58,46 @@ void sleep_routine(t_philo *philo)
     msg_index = philo->id % (sizeof(messages) / sizeof(messages[0]));
     print_message(philo, messages[msg_index]);
     ft_usleep(philo->times.sleep);
+}
+
+void take_forks(t_philo *philo)
+{
+    if (philo->table->count_philo == 1)
+    {
+        pthread_mutex_lock(philo->right_fork);
+        print_message(philo, "has taken a fork 🍴");
+        ft_usleep(philo->times.die);
+        pthread_mutex_unlock(philo->right_fork);
+        return;
+    }
+    if (philo->id % 2 == 0)
+    {
+        pthread_mutex_lock(philo->right_fork);
+        print_message(philo, "has taken a fork 🍴");
+        pthread_mutex_lock(philo->left_fork);
+        print_message(philo, "has taken a fork 🍴");
+    }
+    else 
+    {
+        pthread_mutex_lock(philo->left_fork);
+        print_message(philo, "has taken a fork 🍴");
+        pthread_mutex_lock(philo->right_fork);
+        print_message(philo, "has taken a fork 🍴");
+    }
+}
+
+void release_forks(t_philo *philo)
+{
+    pthread_mutex_unlock(philo->left_fork);
+    pthread_mutex_unlock(philo->right_fork);
+}
+
+void eat_routine(t_philo *philo)
+{
+    take_forks(philo);
+    print_message(philo,"is eating 🤤🍽️");
+    philo->times.last_meal = get_current_time();
+    philo->meals_eaten++;
+    ft_usleep(philo->times.eat);
+    release_forks(philo);
 }

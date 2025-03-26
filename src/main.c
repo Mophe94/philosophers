@@ -6,7 +6,7 @@
 /*   By: dbajeux <dbajeux@student.19.be>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 09:35:35 by dbajeux           #+#    #+#             */
-/*   Updated: 2025/03/25 19:47:20 by dbajeux          ###   ########.fr       */
+/*   Updated: 2025/03/26 11:54:49 by dbajeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ int	main(int argc, char **argv)
 	}
 	else
 	{
-		init_table(&table, ft_atoi(argv[1]));
-		init_philo(&table,ft_atoi(argv[2]),ft_atoi(argv[3]));
+		if (init_table(&table, argv) == FALSE)
+			return (printf("Error : can't initilize the table"),1);
 		//print_table(&table);
         create_threads(&table);	
     	for (int i = 0; i < table.count_philo; i++)

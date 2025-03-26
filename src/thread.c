@@ -6,7 +6,7 @@
 /*   By: dbajeux <dbajeux@student.19.be>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 11:39:55 by dbajeux           #+#    #+#             */
-/*   Updated: 2025/03/25 19:41:55 by dbajeux          ###   ########.fr       */
+/*   Updated: 2025/03/26 10:58:33 by dbajeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	*philosopher_life(void *arg)
 	while (1)
 	{
 		thinking_routine(philo);
+		eat_routine(philo);
 		sleep_routine(philo);
 	}
 	return (NULL);

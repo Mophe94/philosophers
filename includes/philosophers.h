@@ -6,7 +6,7 @@
 /*   By: dbajeux <dbajeux@student.19.be>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:19:33 by dbajeux           #+#    #+#             */
-/*   Updated: 2025/03/25 19:41:40 by dbajeux          ###   ########.fr       */
+/*   Updated: 2025/03/26 11:52:58 by dbajeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 /*                                 MACCRO                                     */
 /* ************************************************************************** */
 
-# define PHILO_MA 200
+# define PHILO_MAX 200
 # define TRUE 0
 # define FALSE 1
 
@@ -44,29 +44,26 @@ typedef struct s_times
 	size_t			sleep;
 	size_t			last_meal;
 	size_t			born_time;
-	bool			is_dead;
 }					t_times;
 
 typedef struct s_table
 {
 	struct s_philo	*philo;
-	pthread_t		monitoring;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	write_lock;
-	pthread_mutex_t	meal_lock;
 	pthread_mutex_t	is_running_lock;
 	int				count_philo;
 	bool			is_running;
-
 }					t_table;
 
 typedef struct s_philo
 {
 	int				id;
-	t_times			times;
 	int				must_eat;
 	int				meals_eaten;
+	bool			is_dead;
 	pthread_t		thread_id;
+	t_times			times;
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*right_fork;
 	t_table			*table;
@@ -85,14 +82,15 @@ long				ft_atol(char *str);
 int					ft_atoi(char *str);
 size_t				get_current_time(void);
 void				*ft_memset(void *b, int c, size_t len);
-int					init_table(t_table *table, int count_philo);
-void				init_philo(t_table *table,size_t time_to_eat,size_t time_to_die);
+int	init_table(t_table *table,char  **argv);
+void init_philo(t_table *table,char **argv);
 void				print_philo(t_philo *philo);
 void				print_table(t_table *table);
 int					create_threads(t_table *table);
 void				*monitoring_life(void *);
 void				thinking_routine(t_philo *philo);
-int print_message(t_philo *philo,char *msg);
-int	ft_usleep(size_t milliseconds);
-void sleep_routine(t_philo *philo);
+int					print_message(t_philo *philo, char *msg);
+int					ft_usleep(size_t milliseconds);
+void				sleep_routine(t_philo *philo);
+void				eat_routine(t_philo *philo);
 #endif
