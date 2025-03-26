@@ -6,7 +6,7 @@
 /*   By: dbajeux <dbajeux@student.19.be>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 11:36:12 by dbajeux           #+#    #+#             */
-/*   Updated: 2025/03/26 11:36:30 by dbajeux          ###   ########.fr       */
+/*   Updated: 2025/03/26 15:17:48 by dbajeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,8 @@ void eat_routine(t_philo *philo)
     take_forks(philo);
     print_message(philo,"is eating 🤤🍽️");
     philo->times.last_meal = get_current_time();
-    philo->meals_eaten++;
+    if (philo->must_eat != -1)
+        philo->meals_eaten++;
     ft_usleep(philo->times.eat);
     release_forks(philo);
 }

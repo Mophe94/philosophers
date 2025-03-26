@@ -6,7 +6,7 @@
 /*   By: dbajeux <dbajeux@student.19.be>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 11:39:55 by dbajeux           #+#    #+#             */
-/*   Updated: 2025/03/26 10:58:33 by dbajeux          ###   ########.fr       */
+/*   Updated: 2025/03/26 15:16:00 by dbajeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,16 @@ int	create_threads(t_table *table)
 	while (i < table->count_philo)
 	{
 		if (pthread_create(&table->philo[i].thread_id, NULL, philosopher_life,
-				&table->philo[i]) != 0)
-			return (printf("Error : can't create thread for the philo number %d\n",
-					table->philo[i].id), FALSE);
+			&table->philo[i]) != 0)
+			return (printf("Error : can't create thread for the philo number %d\n",table->philo[i].id), FALSE);
 		i++;
+	}
+	i = 0;
+	while (i < table->count_philo)
+	{
+		if (pthread_join(table->philo[i].thread_id, NULL) != 0)
+			return (printf("ERROR : EXIT PROG"),FALSE);
+		i++;	
 	}
 	return (TRUE);
 }

@@ -6,7 +6,7 @@
 /*   By: dbajeux <dbajeux@student.19.be>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:27:05 by dbajeux           #+#    #+#             */
-/*   Updated: 2025/03/25 18:05:49 by dbajeux          ###   ########.fr       */
+/*   Updated: 2025/03/26 15:24:23 by dbajeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 // rajouter a la fin du projet de mettre une condition pour faire en sorete que pas plus de 200 philo soit cree 
 // mais seulement a ala fin pour pouvoir tester comme une brute 
+/*check si la validiter des argv est correct  si il ne sont pas a NULL car sinon fait planter le projet 
+a partir des inits*/
 
 int	check_args(int argc, char **argv)
 {
@@ -24,7 +26,7 @@ int	check_args(int argc, char **argv)
 	j = 0;
 	if (argc != 6 && argc != 5)
 	{
-		printf("Error : put 5 or 6 arguments\n");
+		printf("Error : put 4 or 5 arguments\n");
 		return (FALSE);
 	}
 	while (argv[i])
