@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbajeux <dbajeux@student.19.be>            +#+  +:+       +#+        */
+/*   By: dbajeux <dbajeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:18:01 by dbajeux           #+#    #+#             */
-/*   Updated: 2025/03/25 19:37:35 by dbajeux          ###   ########.fr       */
+/*   Updated: 2025/03/27 11:46:57 by dbajeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ int	ft_isdigit(int c)
 
 long	ft_atol(char *str)
 {
-	int i;
-	int sign;
-	unsigned long long result;
+	int					i;
+	int					sign;
+	unsigned long long	result;
 
 	i = 0;
 	sign = 1;
@@ -73,9 +73,9 @@ static int	ft_check(int sign)
 
 int	ft_atoi(char *str)
 {
-	int i;
-	int sign;
-	unsigned long long result;
+	int					i;
+	int					sign;
+	unsigned long long	result;
 
 	i = 0;
 	sign = 1;
@@ -98,13 +98,13 @@ int	ft_atoi(char *str)
 	return (result * sign);
 }
 
-size_t get_current_time(void)
+size_t	get_current_time(void)
 {
-	struct timeval time_now;
+	struct timeval	time_now;
 
-	if (gettimeofday(&time_now,NULL) == -1)
+	if (gettimeofday(&time_now, NULL) == -1)
 	{
-		write(2,"Error in function getimeofday()\n",32);
+		write(2, "Error in function getimeofday()\n", 32);
 		return (FALSE);
 	}
 	return (time_now.tv_sec * 1000 + time_now.tv_usec / 1000);
@@ -125,14 +125,17 @@ void	*ft_memset(void *b, int c, size_t len)
 	return (b);
 }
 
-/*le fait d utiliser cette fonction a la place d un usleep "normal"  améliore la précision, la réactivité et l’adaptabilité du programme.
+/*le fait d utiliser cette fonction a la place d un usleep "normal"  améliore la précision,
+	la réactivité et l’adaptabilité du programme.
 usleep(500) dans la boucle permet de réduire le temps de sommeil par petites tranches au lieu d’attendre une longue période d’un seul coup.
 Cela permet de réagir plus vite aux changements d’état du programme (comme une fin de simulation ou la détection d’un philosophe mort).
-Dans le contexte de Philosophers, où la gestion du temps est critique pour éviter les conditions de famine et la synchronisation des threads, cette approche améliore la fluidité du programme. */
+Dans le contexte de Philosophers,
+	où la gestion du temps est critique pour éviter les conditions de famine et la synchronisation des threads,
+	cette approche améliore la fluidité du programme. */
 
 int	ft_usleep(size_t milliseconds)
 {
-	size_t	start;
+	size_t start;
 
 	start = get_current_time();
 	while ((get_current_time() - start) < milliseconds)
