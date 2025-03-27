@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbajeux <dbajeux@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dbajeux <dbajeux@student.19.be>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:19:33 by dbajeux           #+#    #+#             */
-/*   Updated: 2025/03/27 12:05:20 by dbajeux          ###   ########.fr       */
+/*   Updated: 2025/03/27 14:07:16 by dbajeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,6 @@ size_t				get_current_time(void);
 void				*ft_memset(void *b, int c, size_t len);
 int					init_table(t_table *table, char **argv, int argc);
 void				init_philo(t_table *table, char **argv, int argc);
-void				print_philo(t_philo *philo);
-void				print_table(t_table *table);
 int					create_threads(t_table *table);
 void				*monitoring_life(void *);
 void				thinking_routine(t_philo *philo);
@@ -96,4 +94,5 @@ void				sleep_routine(t_philo *philo);
 void				eat_routine(t_philo *philo);
 int					check_table_is_running(t_philo *philo);
 int					check_death_philo(t_table *table);
+int check_must_eat_philo(t_table *table);
 #endif

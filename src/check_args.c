@@ -6,7 +6,7 @@
 /*   By: dbajeux <dbajeux@student.19.be>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:27:05 by dbajeux           #+#    #+#             */
-/*   Updated: 2025/03/26 15:24:23 by dbajeux          ###   ########.fr       */
+/*   Updated: 2025/03/27 14:22:23 by dbajeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ int	check_args(int argc, char **argv)
 
 	i = 1;
 	j = 0;
+	if (!argv[1])
+		return (FALSE);
 	if (argc != 6 && argc != 5)
 	{
 		printf("Error : put 4 or 5 arguments\n");

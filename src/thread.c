@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   thread.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbajeux <dbajeux@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dbajeux <dbajeux@student.19.be>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 11:39:55 by dbajeux           #+#    #+#             */
-/*   Updated: 2025/03/27 12:17:18 by dbajeux          ###   ########.fr       */
+/*   Updated: 2025/03/27 14:09:10 by dbajeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philosophers.h"
-
-/*doit encore etre fini une fois la partie monitoring faite*/
 
 void	*philosopher_life(void *arg)
 {
@@ -44,7 +42,7 @@ void *monitoring_life(void *arg)
             break;
         }
         pthread_mutex_unlock(&table->is_running_lock);
-        if (check_death_philo(table) == TRUE /*|| check_must_eat_philo(table) == TRUE*/)	
+        if (check_death_philo(table) == FALSE || check_must_eat_philo(table) == FALSE)	
 			break;
 	}
     return (NULL);

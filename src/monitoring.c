@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   monitoring.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbajeux <dbajeux@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dbajeux <dbajeux@student.19.be>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 11:35:28 by dbajeux           #+#    #+#             */
-/*   Updated: 2025/03/27 12:18:30 by dbajeux          ###   ########.fr       */
+/*   Updated: 2025/03/27 14:19:52 by dbajeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,40 @@ void	print_message(t_philo *philo, char *msg)
 	pthread_mutex_unlock(&philo->table->write_lock);
 }
 
+int check_must_eat_philo(t_table *table)
+{
+    int i;
+    int finish_eating;
+    
+    i = 0;
+    finish_eating = 0;
+    if (table->philo[0].must_eat == -1)
+        return (TRUE);
+    pthread_mutex_lock(&table->is_running_lock);
+    if (table->is_running == FALSE)
+    {
+        pthread_mutex_unlock(&table->is_running_lock);
+        return (FALSE);
+    }
+    pthread_mutex_unlock(&table->is_running_lock);
+    while(i < table->count_philo)
+    {
+        pthread_mutex_lock(&table->meal_lock);
+        if (table->philo[i] .meals_eaten >= table->philo->must_eat)
+            finish_eating++;
+        pthread_mutex_unlock(&table->meal_lock);
+        i++;        
+    }
+    if (finish_eating == table->count_philo)
+    {
+        pthread_mutex_lock(&table->is_running_lock);
+        table->is_running = FALSE;
+        pthread_mutex_unlock(&table->is_running_lock);
+        return (FALSE);
+    }
+    return (TRUE);
+}
+
 int check_death_philo(t_table *table)
 {
     int i;
@@ -58,10 +92,10 @@ int check_death_philo(t_table *table)
             pthread_mutex_lock(&table->is_running_lock);
             table->is_running = FALSE;
             pthread_mutex_unlock(&table->is_running_lock);
-            return (TRUE);
+            return (FALSE);
         }
         pthread_mutex_unlock(&table->meal_lock);
         i++;
     }
-    return (FALSE);
+    return (TRUE);
 }
