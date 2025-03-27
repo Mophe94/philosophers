@@ -28,7 +28,6 @@ SRC = $(SRC_DIR)/main.c\
 	  $(SRC_DIR)/check_args.c\
 	  $(SRC_DIR)/init.c\
 	  $(SRC_DIR)/monitoring.c\
-	  $(SRC_DIR)/print_test.c\
 	  $(SRC_DIR)/routine.c\
 	  $(SRC_DIR)/thread.c\
 

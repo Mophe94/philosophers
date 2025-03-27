@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbajeux <dbajeux@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dbajeux <dbajeux@student.19.be>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:18:01 by dbajeux           #+#    #+#             */
-/*   Updated: 2025/03/27 11:46:57 by dbajeux          ###   ########.fr       */
+/*   Updated: 2025/03/27 16:00:29 by dbajeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,10 +135,33 @@ Dans le contexte de Philosophers,
 
 int	ft_usleep(size_t milliseconds)
 {
-	size_t start;
+	size_t	start;
 
 	start = get_current_time();
 	while ((get_current_time() - start) < milliseconds)
 		usleep(500);
 	return (0);
+}
+
+void	kill_prog(t_table *table, char *msg)
+{
+	int	i;
+
+	i = 0;
+	if (!table)
+		return ;
+	if (msg)
+		printf("%s\n", msg);
+	pthread_mutex_destroy(&table->is_running_lock);
+	pthread_mutex_destroy(&table->write_lock);
+	pthread_mutex_destroy(&table->meal_lock);
+	while (i < table->count_philo)
+	{
+		pthread_mutex_destroy(&table->forks[i]);
+		i++;
+	}
+	if (table->forks)
+		free(table->forks);
+	if (table->philo)
+		free(table->philo);
 }

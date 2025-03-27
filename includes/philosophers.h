@@ -6,7 +6,7 @@
 /*   By: dbajeux <dbajeux@student.19.be>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:19:33 by dbajeux           #+#    #+#             */
-/*   Updated: 2025/03/27 14:07:16 by dbajeux          ###   ########.fr       */
+/*   Updated: 2025/03/27 15:55:12 by dbajeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,5 +94,6 @@ void				sleep_routine(t_philo *philo);
 void				eat_routine(t_philo *philo);
 int					check_table_is_running(t_philo *philo);
 int					check_death_philo(t_table *table);
-int check_must_eat_philo(t_table *table);
+int					check_must_eat_philo(t_table *table);
+void				kill_prog(t_table *table, char *msg);
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbajeux <dbajeux@student.42.fr>            +#+  +:+       +#+        */
+/*   By: dbajeux <dbajeux@student.19.be>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 11:36:12 by dbajeux           #+#    #+#             */
-/*   Updated: 2025/03/27 12:01:50 by dbajeux          ###   ########.fr       */
+/*   Updated: 2025/03/27 16:00:03 by dbajeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,11 +95,11 @@ void	eat_routine(t_philo *philo)
 {
 	take_forks(philo);
 	print_message(philo, "is eating 🤤🍽️");
-    pthread_mutex_lock(&philo->table->meal_lock);
+	pthread_mutex_lock(&philo->table->meal_lock);
 	philo->times.last_meal = get_current_time();
 	if (philo->must_eat != -1)
 		philo->meals_eaten++;
-    pthread_mutex_unlock(&philo->table->meal_lock);
+	pthread_mutex_unlock(&philo->table->meal_lock);
 	ft_usleep(philo->times.eat);
 	release_forks(philo);
 }
