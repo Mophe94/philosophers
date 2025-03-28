@@ -6,7 +6,7 @@
 /*   By: dbajeux <dbajeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 14:18:01 by dbajeux           #+#    #+#             */
-/*   Updated: 2025/03/28 10:38:04 by dbajeux          ###   ########.fr       */
+/*   Updated: 2025/03/28 17:34:20 by dbajeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,6 @@ size_t	get_current_time(void)
 	}
 	return (time_now.tv_sec * 1000 + time_now.tv_usec / 1000);
 }
-
 
 void	*ft_memset(void *b, int c, size_t len)
 {

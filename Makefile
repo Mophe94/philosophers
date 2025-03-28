@@ -16,7 +16,7 @@ NAME = philo
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror 
+CFLAGS = -Wall -Wextra -Werror -fsanitize=thread 
 
 # Directories
 SRC_DIR = src

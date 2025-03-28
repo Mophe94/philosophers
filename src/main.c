@@ -6,7 +6,7 @@
 /*   By: dbajeux <dbajeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 09:35:35 by dbajeux           #+#    #+#             */
-/*   Updated: 2025/03/28 12:24:21 by dbajeux          ###   ########.fr       */
+/*   Updated: 2025/03/28 17:08:56 by dbajeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,8 @@ int	main(int argc, char **argv)
 	{
 		if (init_table(&table, argv, argc) == FALSE)
 			return (printf("Error : can't initilize the table\n"), 1);
-		print_table(&table);
 		if (create_threads(&table) == FALSE)
-			return (printf("Error : End of simulation\n ❌ \n"), 1);
+			return (printf("Error : End of simulation❌\n"), 1);
 		kill_prog(&table, "Succes : End of Simulation ✅ \n");
 	}
 	return (0);
