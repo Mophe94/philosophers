@@ -6,7 +6,7 @@
 /*   By: dbajeux <dbajeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 15:57:18 by dbajeux           #+#    #+#             */
-/*   Updated: 2025/03/27 12:00:31 by dbajeux          ###   ########.fr       */
+/*   Updated: 2025/03/28 12:40:23 by dbajeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	init_philo(t_table *table, char **argv, int argc)
 		table->philo[i].meals_eaten = 0;
 		table->philo[i].is_dead = FALSE;
 		table->philo[i].table = table;
+		table->philo[i].eating = FALSE;
 		table->philo[i].left_fork = &table->forks[i];
 		table->philo[i].right_fork = &table->forks[(i + 1)
 			% table->count_philo];
@@ -36,6 +37,7 @@ void	init_philo(t_table *table, char **argv, int argc)
 		table->philo[i].times.last_meal = get_current_time();
 		table->philo[i].times.born_time = get_current_time();
 		i++;
+		
 	}
 }
 
@@ -69,4 +71,27 @@ int	init_table(t_table *table, char **argv, int argc)
 	}
 	init_philo(table, argv, argc);
 	return (TRUE);
+}
+
+void print_table(t_table *table)
+{
+    int i;
+
+    printf("Table des philosophes :\n");
+    printf("----------------------------\n");
+    for (i = 0; i < table->count_philo; i++)
+    {
+        printf("Philosophe %d:\n", table->philo[i].id);
+        printf("\tMeals eaten: %d\n", table->philo[i].meals_eaten);
+        printf("\tIs dead: %s\n", table->philo[i].is_dead ? "TRUE" : "FALSE");
+        printf("\tEating: %s\n", table->philo[i].eating ? "TRUE" : "FALSE");
+        printf("\tForks: Left fork = %p, Right fork = %p\n", 
+               table->philo[i].left_fork, table->philo[i].right_fork);
+        printf("\tTimes: Eat time = %zu, Die time = %zu, Sleep time = %zu\n",
+               table->philo[i].times.eat, table->philo[i].times.die, table->philo[i].times.sleep);
+        printf("\tMust eat: %d\n", table->philo[i].must_eat);
+        printf("\tLast meal time: %ld, Born time: %ld\n", 
+               table->philo[i].times.last_meal, table->philo[i].times.born_time);
+        printf("----------------------------------\n");
+    }
 }

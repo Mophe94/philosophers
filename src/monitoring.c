@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   monitoring.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbajeux <dbajeux@student.19.be>            +#+  +:+       +#+        */
+/*   By: dbajeux <dbajeux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 11:35:28 by dbajeux           #+#    #+#             */
-/*   Updated: 2025/03/27 15:59:58 by dbajeux          ###   ########.fr       */
+/*   Updated: 2025/03/28 12:44:12 by dbajeux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,12 @@ int	check_must_eat_philo(t_table *table)
 int	check_death_philo(t_table *table)
 {
 	int i;
-
+    int last_meal;
+    size_t	time;
+    
 	i = 0;
+    last_meal = 0;
+    time = get_current_time() - table->philo[i].times.born_time;
 	pthread_mutex_lock(&table->is_running_lock);
 	if (table->is_running == FALSE)
 	{
@@ -84,17 +88,19 @@ int	check_death_philo(t_table *table)
 	while (i < table->count_philo)
 	{
 		pthread_mutex_lock(&table->meal_lock);
-		if (get_current_time()
-			- table->philo[i].times.last_meal >= table->philo[i].times.die)
+        last_meal = table->philo[i].times.last_meal;
+		pthread_mutex_unlock(&table->meal_lock);
+        pthread_mutex_lock(&table->write_lock);
+        printf("%zu Philosophe %d last meal : %zu\n", time, table->philo->id, table->philo[i].times.last_meal);
+        pthread_mutex_unlock(&table->write_lock);
+		if (table->philo[i].eating == FALSE && (get_current_time()- last_meal >= table->philo[i].times.die))
 		{
-			pthread_mutex_unlock(&table->meal_lock);
 			print_message(&table->philo[i], "is dead 💀\n");
 			pthread_mutex_lock(&table->is_running_lock);
 			table->is_running = FALSE;
 			pthread_mutex_unlock(&table->is_running_lock);
 			return (FALSE);
 		}
-		pthread_mutex_unlock(&table->meal_lock);
 		i++;
 	}
 	return (TRUE);
